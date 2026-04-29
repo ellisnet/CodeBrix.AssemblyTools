@@ -1,0 +1,18 @@
+{
+  "$schema": "https://xunit.net/schema/v3/xunit.runner.schema.json",
+
+  "// comment": [
+    "The Mono.Cecil 0.11.5 test suite (ported here into CodeBrix.AssemblyTools.Tests)",
+    "was designed for NUnit's default sequential-within-fixture execution model.",
+    "Many tests round-trip assemblies through shared temp paths under",
+    "Path.GetTempPath()/cecil-irt and /cecil-drt via TestRunner.RoundTrip, so running",
+    "test collections in parallel races them into IOException ('file is being used",
+    "by another process') and into library-internal non-thread-safe collection writes.",
+    "",
+    "Disabling cross-collection parallelism restores the upstream execution model.",
+    "Individual test methods inside a collection still run sequentially. ~11-second",
+    "total wall-clock time is unaffected because the suite isn't CPU-bound."
+  ],
+
+  "parallelizeTestCollections": false
+}

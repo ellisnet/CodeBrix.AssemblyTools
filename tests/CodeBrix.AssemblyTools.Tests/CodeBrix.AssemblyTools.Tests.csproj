@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="xunit.v3" Version="3.2.2" />
+    <PackageReference Include="coverlet.collector" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="SilverAssertions.ApacheLicenseForever" Version="1.0.49" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CodeBrix.AssemblyTools\CodeBrix.AssemblyTools.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Resources/ contains Mono.Cecil upstream test-input fixtures (pre-built .dll/.exe/.pdb/.mdb
+         plus .cs/.il source files intended as inputs to CompilationService, not as test code).
+         Exclude them from the default <Compile> glob so they don't collide with each other, and
+         expose them as Content copied to the build output so the runtime helpers can locate them. -->
+    <Compile Remove="Resources\**\*.cs" />
+    <None Remove="Resources\**\*.cs" />
+    <Content Include="Resources\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!--
+    P2/P3 port WIP: the 11 upstream Mono.Cecil test files listed below were
+    previously excluded because of Assert.That-with-complex-constraint patterns,
+    Assert.Equal type-coercion issues, internal Collection<T> access, and
+    similar mechanical-port friction. As of the .Using(comparer) handler added
+    to fix_asserts.py, we re-enable all of them. If anything still fails to
+    compile, we'll exclude it again with a targeted comment at the next commit.
+  -->
+
+
+</Project>

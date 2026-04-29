@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>CodeBrix.AssemblyTools</AssemblyName>
+    <RootNamespace>CodeBrix.AssemblyTools</RootNamespace>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!--
+      Exception to the CodeBrix "no project-wide NoWarn" rule, granted for
+      this library only: CS8981 warns about all-lowercase type names (e.g.
+      `bucket`, `HashProvider`). Every hit fires on upstream Microsoft.Cci.Pdb
+      source that we incorporate verbatim under the Pdb.Cci/ folder; renaming
+      those types at source would diverge from upstream without buying anything,
+      so we suppress the warning project-wide.
+    -->
+    <NoWarn>$(NoWarn);CS8981</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>CodeBrix.AssemblyTools.MitLicenseForever</PackageId>
+    <Version>1.0.117</Version>
+    <Product>CodeBrix.AssemblyTools</Product>
+    <Title>CodeBrix.AssemblyTools</Title>
+    <Authors>Jeremy Ellis</Authors>
+    <Description>A .NET-10 port of Mono.Cecil 0.11.5: a fully managed library for reading, writing, and rewriting .NET assemblies, IL, metadata, and debug symbols (portable PDB, native PDB, and Mono MDB). Provides a drop-in replacement for the Mono.Cecil NuGet package after a namespace find/replace (Mono.Cecil -> CodeBrix.AssemblyTools). Merges Mono.Cecil, Mono.Cecil.Rocks, Mono.Cecil.Pdb, and Mono.Cecil.Mdb into one assembly.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/ellisnet/CodeBrix.AssemblyTools</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ellisnet/CodeBrix.AssemblyTools</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageIcon>icon-codebrix-128.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Copyright>Copyright (c) 2026 Jeremy Ellis and contributors</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <IsPackable>true</IsPackable>
+    <PackageTags>assembly;il;metadata;pe;pdb;mdb;reflection;cecil;rewriter;CodeBrix</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon-codebrix-128.png" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="" />
+    <None Include="..\..\AGENT-README.txt" Pack="true" PackagePath="" />
+    <None Include="..\..\THIRD-PARTY-NOTICES.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>
