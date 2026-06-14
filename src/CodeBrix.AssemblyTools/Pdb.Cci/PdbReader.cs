@@ -17,7 +17,7 @@ namespace CodeBrix.AssemblyTools.Pdb.Cci; //was previously: Microsoft.Cci.Pdb;
     }
 
     internal void Read(byte[] bytes, int offset, int count) {
-      reader.Read(bytes, offset, count);
+      reader.ReadExactly(bytes, offset, count);
     }
 
     internal int PagesFromSize(int size) {

@@ -30,6 +30,8 @@
 using System;
 using System.Security.Cryptography;
 
+#pragma warning disable CA1416
+
 namespace CodeBrix.AssemblyTools.Security.Cryptography; //was previously: Mono.Security.Cryptography;
 
 

@@ -18,6 +18,9 @@ using CodeBrix.AssemblyTools.Security.Cryptography;
 
 using CodeBrix.AssemblyTools.PE;
 
+#pragma warning disable IDE0130
+#pragma warning disable CA1416
+
 namespace CodeBrix.AssemblyTools; //was previously: Mono.Cecil;
 
 

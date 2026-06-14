@@ -25,7 +25,7 @@ namespace CodeBrix.AssemblyTools.Pdb.Cci; //was previously: Microsoft.Cci.Pdb;
 
     internal void FillBuffer(Stream stream, int capacity) {
       MinCapacity(capacity);
-      stream.Read(buffer, 0, capacity);
+      stream.ReadExactly(buffer, 0, capacity);
       offset = 0;
     }
 
@@ -36,7 +36,7 @@ namespace CodeBrix.AssemblyTools.Pdb.Cci; //was previously: Microsoft.Cci.Pdb;
         Array.Copy(buffer, newBuffer, buffer.Length);
         buffer = newBuffer;
       }
-      stream.Read(buffer, offset, count);
+      stream.ReadExactly(buffer, offset, count);
       offset += count;
     }
 

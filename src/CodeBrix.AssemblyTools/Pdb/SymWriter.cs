@@ -13,6 +13,8 @@ using System.Runtime.InteropServices;
 using CodeBrix.AssemblyTools.Cil;
 using CodeBrix.AssemblyTools.Collections.Generic;
 
+#pragma warning disable CA1416
+
 namespace CodeBrix.AssemblyTools.Pdb; //was previously: Mono.Cecil.Pdb;
 
 internal class SymWriter
