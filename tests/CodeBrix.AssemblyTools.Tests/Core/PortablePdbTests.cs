@@ -414,6 +414,7 @@ namespace CodeBrix.AssemblyTools.Tests.Core; //was previously: Mono.Cecil.Tests;
 		[Fact]
 		public void RoundTripPortablePdb ()
 		{
+			// "cecil.dll" is the upstream Mono.Cecil portable-PDB binary fixture, kept verbatim to prove round-trip compatibility -- do not rename.
 			TestModule ("cecil.dll", module => {
 				Assert.True (module.HasSymbols);
 			}, symbolReaderProvider: typeof (PortablePdbReaderProvider), symbolWriterProvider: typeof (PortablePdbWriterProvider));

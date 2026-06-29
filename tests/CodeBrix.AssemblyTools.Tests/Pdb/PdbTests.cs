@@ -14,6 +14,7 @@ namespace CodeBrix.AssemblyTools.Tests.Pdb; //was previously: Mono.Cecil.Tests;
 				var type = module.GetType ("Program");
 				var main = type.GetMethod ("Main");
 
+				// The "c:\sources\cecil\..." source paths in the expected disassembly below are baked into the upstream Mono.Cecil-built "test.exe" PDB fixture; kept verbatim to prove read compatibility.
 				AssertCode (@"
 	.locals init (System.Int32 i, System.Int32 CS$1$0000, System.Boolean CS$4$0001)
 	.line 6,6:2,3 'c:\sources\cecil\symbols\Mono.Cecil.Pdb\Test\Resources\assemblies\test.cs'
@@ -93,6 +94,7 @@ namespace CodeBrix.AssemblyTools.Tests.Pdb; //was previously: Mono.Cecil.Tests;
 
 				Assert.NotNull (document);
 
+				// The "c:\sources\cecil\..." document URL is baked into the upstream Mono.Cecil-built "test.exe" PDB fixture; kept verbatim to prove read compatibility.
 				(document.Url).Should().Be(@"c:\sources\cecil\symbols\Mono.Cecil.Pdb\Test\Resources\assemblies\test.cs");
 				(document.Type).Should().Be(DocumentType.Text);
 				(document.HashAlgorithm).Should().Be(DocumentHashAlgorithm.MD5);
@@ -375,6 +377,7 @@ namespace CodeBrix.AssemblyTools.Tests.Pdb; //was previously: Mono.Cecil.Tests;
 		[Fact]
 		public void ImportsForFirstMethod ()
 		{
+			// "CecilTest.exe" / "CecilTest.Program" are the upstream Mono.Cecil binary fixture's own file and type names, kept verbatim to prove read compatibility -- do not rename.
 			TestModule ("CecilTest.exe", module => {
 				var type = module.GetType ("CecilTest.Program");
 				var method = type.GetMethod ("Main");

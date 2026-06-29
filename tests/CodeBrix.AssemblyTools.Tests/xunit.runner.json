@@ -5,7 +5,7 @@
     "The Mono.Cecil 0.11.5 test suite (ported here into CodeBrix.AssemblyTools.Tests)",
     "was designed for NUnit's default sequential-within-fixture execution model.",
     "Many tests round-trip assemblies through shared temp paths under",
-    "Path.GetTempPath()/cecil-irt and /cecil-drt via TestRunner.RoundTrip, so running",
+    "Path.GetTempPath()/codebrix-assemblytools-irt and /codebrix-assemblytools-drt via TestRunner.RoundTrip, so running",
     "test collections in parallel races them into IOException ('file is being used",
     "by another process') and into library-internal non-thread-safe collection writes.",
     "",

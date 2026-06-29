@@ -14,6 +14,7 @@ namespace CodeBrix.AssemblyTools.Tests.Mdb; //was previously: Mono.Cecil.Tests;
 				var type = module.GetType ("Program");
 				var main = type.GetMethod ("Main");
 
+				// The "C:\sources\cecil\..." source paths in the expected disassembly below are baked into the upstream Mono.Cecil-built "simplemdb.exe" MDB fixture; kept verbatim to prove read compatibility.
 				AssertCode (@"
 	.locals init (System.Int32 i)
 	.line 6,-1:-1,-1 'C:\sources\cecil\symbols\Mono.Cecil.Mdb\Test\Resources\assemblies\hello.cs'

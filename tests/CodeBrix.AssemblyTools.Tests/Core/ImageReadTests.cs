@@ -57,6 +57,7 @@ public class ImageReadTests : BaseTestFixture {
 
 			Assert.NotNull (image.UserStringHeap);
 			(image.UserStringHeap.Read (0)).Should().Be(string.Empty);
+			// "Hello Cecil World !" is baked into the upstream Mono.Cecil-built "hello.exe" fixture's user-string heap; kept verbatim to prove read compatibility -- do not rename.
 			(image.UserStringHeap.Read (1)).Should().Be("Hello Cecil World !");
 
 			Assert.NotNull (image.GuidHeap);
