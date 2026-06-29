@@ -110,7 +110,7 @@ class Steven {
 class Seagull {
 }
 
-[Foo (new char [] { 'c', 'e', 'c', 'i', 'l' })]
+[Foo (new char [] { 'h', 'e', 'l', 'l', 'o' })]
 class Rifle {
 }
 

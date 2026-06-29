@@ -412,7 +412,7 @@ namespace CodeBrix.AssemblyTools.Tests.Pdb; //was previously: Mono.Cecil.Tests;
 		public void CreateMethodFromScratch ()
 		{
 			if (!Platform.HasNativePdbSupport)
-				Assert.Skip("This test was skipped in the original Mono.Cecil codebase.");
+				Assert.Skip("This test was skipped in the original upstream codebase.");
 
 			var module = ModuleDefinition.CreateModule ("Pan", ModuleKind.Dll);
 			var type = new TypeDefinition ("Pin", "Pon", TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Sealed, module.ImportReference (typeof (object)));
@@ -466,7 +466,7 @@ namespace CodeBrix.AssemblyTools.Tests.Pdb; //was previously: Mono.Cecil.Tests;
 		public void TypeNameExceedingMaxPdbPath ()
 		{
 			if (!Platform.HasNativePdbSupport)
-				Assert.Skip("This test was skipped in the original Mono.Cecil codebase.");
+				Assert.Skip("This test was skipped in the original upstream codebase.");
 
 			TestModule ("longtypename.dll", module => {
 				Assert.True (module.HasSymbols);

@@ -412,7 +412,7 @@ namespace CodeBrix.AssemblyTools.Tests.Core; //was previously: Mono.Cecil.Tests;
 		}
 
 		[Fact]
-		public void RoundTripCecilPortablePdb ()
+		public void RoundTripPortablePdb ()
 		{
 			TestModule ("cecil.dll", module => {
 				Assert.True (module.HasSymbols);

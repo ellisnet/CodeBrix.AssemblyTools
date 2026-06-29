@@ -1017,15 +1017,15 @@ static class SymbolProvider {
 
 		var suffix = GetSymbolNamespace (kind);
 
-		var cecil_name = typeof (SymbolProvider).Assembly.GetName ();
+		var assembly_name = typeof (SymbolProvider).Assembly.GetName ();
 
 		var name = new SR.AssemblyName {
-			Name = cecil_name.Name + "." + suffix,
-			Version = cecil_name.Version,
-			CultureName = cecil_name.CultureName,
+			Name = assembly_name.Name + "." + suffix,
+			Version = assembly_name.Version,
+			CultureName = assembly_name.CultureName,
 		};
 
-		name.SetPublicKeyToken (cecil_name.GetPublicKeyToken ());
+		name.SetPublicKeyToken (assembly_name.GetPublicKeyToken ());
 
 		return name;
 	}

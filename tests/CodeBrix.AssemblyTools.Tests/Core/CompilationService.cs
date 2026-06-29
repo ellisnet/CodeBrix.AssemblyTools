@@ -103,11 +103,11 @@ abstract class CompilationService {
 
 	protected static string GetCompiledFilePath (string file_name)
 	{
-		var tmp_cecil = Path.Combine (Path.GetTempPath (), "cecil");
-		if (!Directory.Exists (tmp_cecil))
-			Directory.CreateDirectory (tmp_cecil);
+		var tmp_output = Path.Combine (Path.GetTempPath (), "codebrix-assemblytools");
+		if (!Directory.Exists (tmp_output))
+			Directory.CreateDirectory (tmp_output);
 
-		return Path.Combine (tmp_cecil, Path.GetFileName (file_name) + ".dll");
+		return Path.Combine (tmp_output, Path.GetFileName (file_name) + ".dll");
 	}
 
 	public static void Verify (string name)

@@ -44,19 +44,19 @@ public abstract class BaseTestFixture {
 	protected static void IgnoreOnMono ()
 	{
 		if (Platform.OnMono)
-			Assert.Skip("This test was skipped in the original Mono.Cecil codebase.");
+			Assert.Skip("This test was skipped in the original upstream codebase.");
 	}
 
 	protected static void IgnoreOnCoreClr ()
 	{
 		if (Platform.OnCoreClr)
-			Assert.Skip("This test was skipped in the original Mono.Cecil codebase.");
+			Assert.Skip("This test was skipped in the original upstream codebase.");
 	}
 
 	protected static void OnlyOnWindows ()
 	{
 		if (!Platform.OnWindows)
-			Assert.Skip("This test was skipped in the original Mono.Cecil codebase.");
+			Assert.Skip("This test was skipped in the original upstream codebase.");
 	}
 
 	public static string GetResourcePath (string name, string sourceFilePath)
@@ -153,7 +153,7 @@ public abstract class BaseTestFixture {
 	public static void TestIL (string file, Action<ModuleDefinition> test, bool verify = true, bool readOnly = false, Type symbolReaderProvider = null, Type symbolWriterProvider = null, IAssemblyResolver assemblyResolver = null, bool applyWindowsRuntimeProjections = false, [CallerFilePath] string sourceFilePath = "")
 	{
 		if (!_ilasmAvailable.Value)
-			Assert.Skip ("This test requires the `ilasm` IL-assembler executable on PATH so that upstream Mono.Cecil `.il` test fixtures can be compiled to `.dll` at test time. CodeBrix.AssemblyTools itself does not depend on ilasm -- only this test does. On Linux, running `sudo apt install mono-devel` *may* install an `ilasm` that lets this test pass.");
+			Assert.Skip ("This test requires the `ilasm` IL-assembler executable on PATH so that the upstream `.il` test fixtures can be compiled to `.dll` at test time. CodeBrix.AssemblyTools itself does not depend on ilasm -- only this test does. On Linux, running `sudo apt install mono-devel` *may* install an `ilasm` that lets this test pass.");
 
 		Run (new ILTestCase (file, test, verify, readOnly, symbolReaderProvider, symbolWriterProvider, assemblyResolver, applyWindowsRuntimeProjections, sourceFilePath));
 	}
@@ -290,10 +290,10 @@ class TestRunner : IDisposable {
 			return ModuleDefinition.ReadModule (location, parameters);
 		case TestCaseType.WriteFromImmediate:
 			parameters.ReadingMode = ReadingMode.Immediate;
-			return RoundTrip (location, parameters, "cecil-irt");
+			return RoundTrip (location, parameters, "codebrix-assemblytools-irt");
 		case TestCaseType.WriteFromDeferred:
 			parameters.ReadingMode = ReadingMode.Deferred;
-			return RoundTrip (location, parameters, "cecil-drt");
+			return RoundTrip (location, parameters, "codebrix-assemblytools-drt");
 		default:
 			return null;
 		}

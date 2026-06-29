@@ -87,14 +87,14 @@ public class TypeParserTests : BaseTestFixture {
 	public void FullyQualifiedTypeReference ()
 	{
 		var module = GetCurrentModule ();
-		var cecil = module.AssemblyReferences.Where (reference => reference.Name != typeof (TypeDefinition).Assembly.GetName ().Name).First ();
+		var assembly_ref = module.AssemblyReferences.Where (reference => reference.Name != typeof (TypeDefinition).Assembly.GetName ().Name).First ();
 
 		// was previously: var fullname = "Mono.Cecil.TypeDefinition, " + cecil.FullName;
-		var fullname = "CodeBrix.AssemblyTools.TypeDefinition, " + cecil.FullName;
+		var fullname = "CodeBrix.AssemblyTools.TypeDefinition, " + assembly_ref.FullName;
 
 		var type = TypeParser.ParseType (module, fullname);
 		Assert.NotNull (type);
-		(type.Scope).Should().Be(cecil);
+		(type.Scope).Should().Be(assembly_ref);
 		(type.Module).Should().Be(module);
 		// was previously: (type.Namespace).Should().Be("Mono.Cecil");
 		(type.Namespace).Should().Be("CodeBrix.AssemblyTools");

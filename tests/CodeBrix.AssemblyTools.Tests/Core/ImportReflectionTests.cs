@@ -378,7 +378,6 @@ public class ImportReflectionTests : BaseTestFixture {
 	{
 		using (var stream = new MemoryStream ()) {
 			module.Write (stream);
-			File.WriteAllBytes (Path.Combine (Path.Combine (Path.GetTempPath (), "cecil"), module.Name + ".dll"), stream.ToArray ());
 			return SR.Assembly.Load (stream.ToArray ());
 		}
 	}

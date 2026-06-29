@@ -9,7 +9,7 @@ using CodeBrix.AssemblyTools.Cil;
 using Xunit;
 using SilverAssertions;
 namespace CodeBrix.AssemblyTools.Tests.Core; //was previously: Mono.Cecil.Tests;
-public class ImportCecilTests : BaseTestFixture {
+public class ImportDefinitionTests : BaseTestFixture {
 
 	[Fact]
 	public void ImportStringByRef ()
@@ -214,7 +214,7 @@ public class ImportCecilTests : BaseTestFixture {
 		using (var module = ModuleDefinition.CreateModule ("foo", ModuleKind.Dll)) {
 			var method = module.ImportReference (generic.GetMethod ("Method"));
 			// was previously: (method.FullName).Should().Be("T Mono.Cecil.Tests.ImportCecilTests/Generic`1::Method(T)");
-			(method.FullName).Should().Be("T CodeBrix.AssemblyTools.Tests.Core.ImportCecilTests/Generic`1::Method(T)");
+			(method.FullName).Should().Be("T CodeBrix.AssemblyTools.Tests.Core.ImportDefinitionTests/Generic`1::Method(T)");
 		}
 	}
 
@@ -261,7 +261,7 @@ public class ImportCecilTests : BaseTestFixture {
 		var imported_type = module.ImportReference (type);
 		var method = module.ImportReference (meth, imported_type);
 		// was previously: (method.FullName).Should().Be("G1 Mono.Cecil.Tests.ImportCecilTests/ContextGeneric1Method2`1<Mono.Cecil.Tests.ImportCecilTests/ContextGeneric2Method1`2<G2,H2>>::GenericMethod<R1,S1>(R1,S1)");
-		(method.FullName).Should().Be("G1 CodeBrix.AssemblyTools.Tests.Core.ImportCecilTests/ContextGeneric1Method2`1<CodeBrix.AssemblyTools.Tests.Core.ImportCecilTests/ContextGeneric2Method1`2<G2,H2>>::GenericMethod<R1,S1>(R1,S1)");
+		(method.FullName).Should().Be("G1 CodeBrix.AssemblyTools.Tests.Core.ImportDefinitionTests/ContextGeneric1Method2`1<CodeBrix.AssemblyTools.Tests.Core.ImportDefinitionTests/ContextGeneric2Method1`2<G2,H2>>::GenericMethod<R1,S1>(R1,S1)");
 
 		// and the other way around
 		type = typeof (ContextGeneric2Method1<,>).MakeGenericType (typeof (ContextGeneric1Method2<>), typeof (IList<>));
@@ -269,7 +269,7 @@ public class ImportCecilTests : BaseTestFixture {
 		imported_type = module.ImportReference (type);
 		method = module.ImportReference (meth, imported_type);
 		// was previously: (method.FullName).Should().Be("R2 Mono.Cecil.Tests.ImportCecilTests/ContextGeneric2Method1`2<Mono.Cecil.Tests.ImportCecilTests/ContextGeneric1Method2`1<G1>,System.Collections.Generic.IList`1<T>>::GenericMethod<R2>(G2,H2)");
-		(method.FullName).Should().Be("R2 CodeBrix.AssemblyTools.Tests.Core.ImportCecilTests/ContextGeneric2Method1`2<CodeBrix.AssemblyTools.Tests.Core.ImportCecilTests/ContextGeneric1Method2`1<G1>,System.Collections.Generic.IList`1<T>>::GenericMethod<R2>(G2,H2)");
+		(method.FullName).Should().Be("R2 CodeBrix.AssemblyTools.Tests.Core.ImportDefinitionTests/ContextGeneric2Method1`2<CodeBrix.AssemblyTools.Tests.Core.ImportDefinitionTests/ContextGeneric1Method2`1<G1>,System.Collections.Generic.IList`1<T>>::GenericMethod<R2>(G2,H2)");
 
 		// not sure about this one
 		type = typeof (NestedGenericsA<string>.NestedGenericsB<int>.NestedGenericsC<float>);
@@ -277,7 +277,7 @@ public class ImportCecilTests : BaseTestFixture {
 		imported_type = module.ImportReference (type);
 		method = module.ImportReference (meth, imported_type);
 		// was previously: (method.FullName).Should().Be("A Mono.Cecil.Tests.ImportCecilTests/NestedGenericsA`1/NestedGenericsB`1/NestedGenericsC`1<System.String,System.Int32,System.Single>::GenericMethod(B,C)");
-		(method.FullName).Should().Be("A CodeBrix.AssemblyTools.Tests.Core.ImportCecilTests/NestedGenericsA`1/NestedGenericsB`1/NestedGenericsC`1<System.String,System.Int32,System.Single>::GenericMethod(B,C)");
+		(method.FullName).Should().Be("A CodeBrix.AssemblyTools.Tests.Core.ImportDefinitionTests/NestedGenericsA`1/NestedGenericsB`1/NestedGenericsC`1<System.String,System.Int32,System.Single>::GenericMethod(B,C)");
 
 		// We need both the method & type !
 		type = typeof (Generic<>).MakeGenericType (typeof (string));
@@ -285,7 +285,7 @@ public class ImportCecilTests : BaseTestFixture {
 		imported_type = module.ImportReference (type);
 		method = module.ImportReference (meth, imported_type);
 		// was previously: (method.FullName).Should().Be("Mono.Cecil.Tests.ImportCecilTests/Generic`1<TS> Mono.Cecil.Tests.ImportCecilTests/Generic`1<System.String>::ComplexGenericMethod<TS>(T,TS)");
-		(method.FullName).Should().Be("CodeBrix.AssemblyTools.Tests.Core.ImportCecilTests/Generic`1<TS> CodeBrix.AssemblyTools.Tests.Core.ImportCecilTests/Generic`1<System.String>::ComplexGenericMethod<TS>(T,TS)");
+		(method.FullName).Should().Be("CodeBrix.AssemblyTools.Tests.Core.ImportDefinitionTests/Generic`1<TS> CodeBrix.AssemblyTools.Tests.Core.ImportDefinitionTests/Generic`1<System.String>::ComplexGenericMethod<TS>(T,TS)");
 	}
 
 	delegate void Emitter (ModuleDefinition module, MethodBody body);
@@ -293,7 +293,7 @@ public class ImportCecilTests : BaseTestFixture {
 	static TDelegate Compile<TDelegate> (Emitter emitter, [CallerMemberName] string testMethodName = null)
 		where TDelegate : class
 	{
-		var name = "ImportCecil_" + testMethodName;
+		var name = "ImportDefinition_" + testMethodName;
 
 		var module = CreateTestModule<TDelegate> (name, emitter);
 		var assembly = LoadTestModule (module);
@@ -316,7 +316,6 @@ public class ImportCecilTests : BaseTestFixture {
 	{
 		using (var stream = new MemoryStream ()) {
 			module.Write (stream);
-			File.WriteAllBytes (Path.Combine (Path.Combine (Path.GetTempPath (), "cecil"), module.Name + ".dll"), stream.ToArray ());
 			return SR.Assembly.Load (stream.ToArray ());
 		}
 	}
@@ -363,7 +362,7 @@ public class ImportCecilTests : BaseTestFixture {
 	static ModuleDefinition CreateModule (string name)
 	{
 		var resolver = new DefaultAssemblyResolver ();
-		resolver.AddSearchDirectory (Path.GetDirectoryName (typeof (ImportCecilTests).Assembly.Location));
+		resolver.AddSearchDirectory (Path.GetDirectoryName (typeof (ImportDefinitionTests).Assembly.Location));
 		return ModuleDefinition.CreateModule (name, new ModuleParameters { Kind = ModuleKind.Dll, AssemblyResolver = resolver });
 	}
 }

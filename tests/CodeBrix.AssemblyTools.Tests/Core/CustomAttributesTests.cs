@@ -110,7 +110,7 @@ public class CustomAttributesTests : BaseTestFixture {
 			var array = argument.Value as CustomAttributeArgument [];
 			Assert.NotNull (array);
 
-			var str = "cecil";
+			var str = "hello";
 
 			(str.Length).Should().Be(array.Length);
 
