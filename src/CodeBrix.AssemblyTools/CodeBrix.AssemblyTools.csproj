@@ -64,7 +64,7 @@
     <Product>CodeBrix.AssemblyTools</Product>
     <Title>CodeBrix.AssemblyTools</Title>
     <Authors>Jeremy Ellis</Authors>
-    <Description>A .NET-10 port of Mono.Cecil 0.11.6: a fully managed library for reading, writing, and rewriting .NET assemblies, IL, metadata, and debug symbols (portable PDB, native PDB, and Mono MDB). Provides a drop-in replacement for the Mono.Cecil NuGet package after a namespace find/replace (Mono.Cecil -> CodeBrix.AssemblyTools). Merges Mono.Cecil, Mono.Cecil.Rocks, Mono.Cecil.Pdb, and Mono.Cecil.Mdb into one assembly.</Description>
+    <Description>A fully managed library for reading, writing, and rewriting .NET assemblies, IL, metadata, and debug symbols (portable PDB, native PDB, and Mono MDB). The assembly model, the IL emitter, the symbol readers/writers and the extension-method helpers all ship in one assembly, with no NuGet dependencies beyond .NET itself.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/ellisnet/CodeBrix.AssemblyTools</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ellisnet/CodeBrix.AssemblyTools</RepositoryUrl>
@@ -75,7 +75,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <IsPackable>true</IsPackable>
-    <PackageTags>assembly;il;metadata;pe;pdb;mdb;reflection;cecil;rewriter;CodeBrix</PackageTags>
+    <PackageTags>assembly;il;metadata;pe;pdb;mdb;reflection;rewriter;CodeBrix</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

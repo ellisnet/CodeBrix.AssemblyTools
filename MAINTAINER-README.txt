@@ -35,10 +35,15 @@ REPOSITORY LAYOUT
 Root files
 ----------
     CodeBrix.AssemblyTools.slnx    solution; carries a "Solution Items"
-                                   folder (AGENT-README.txt,
+                                   folder (.gitignore, AGENT-README.txt,
+                                   EXTRAS-README.txt, global.json,
                                    icon-codebrix-128.png, LICENSE,
+                                   MAINTAINER-README.txt, README-INDEX.txt,
                                    README.md, THIRD-PARTY-NOTICES.txt) and a
                                    "Tests" folder holding the test project
+    global.json                    selects the Microsoft.Testing.Platform
+                                   test runner; pins no SDK version (see
+                                   TESTING)
     AGENT-README.txt               consumer documentation; PACKED into the
                                    nupkg (see PACKAGING AND PUBLISHING)
     MAINTAINER-README.txt          this file
@@ -146,6 +151,12 @@ TESTING
 =======
 
     dotnet test CodeBrix.AssemblyTools.slnx
+
+The test runner is Microsoft.Testing.Platform, selected by `global.json` at
+the repository root (`{ "test": { "runner": "Microsoft.Testing.Platform" } }`).
+That file pins no SDK version, so the newest installed .NET 10 SDK is still
+used; keep it committed, because without it `dotnet test` falls back to the
+older VSTest bridge.
 
     # one class
     dotnet test CodeBrix.AssemblyTools.slnx --filter "FullyQualifiedName~ModuleTests"
@@ -307,10 +318,10 @@ harness to .NET 8) is moot because these tests target net10.0, and ba9c6c7
 (bump .NET Framework reference assemblies) is moot because this port does
 not target .NET Framework.
 
-Known metadata discrepancy: the PackageDescription in the library csproj
-still says "a .NET-10 port of Mono.Cecil 0.11.5". The code, the notices file
-and the consumer documentation are all at 0.11.6. Correct the Description
-the next time the csproj is touched for another reason.
+The library csproj's PackageDescription is written as a plain statement of
+what the library does; upstream project names and upstream version numbers
+belong in THIRD-PARTY-NOTICES.txt and in this file, not in the NuGet
+metadata or in README.md.
 
 Maintaining the vendored source
 -------------------------------

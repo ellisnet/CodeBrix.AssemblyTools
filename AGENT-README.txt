@@ -22,7 +22,7 @@ Target framework: .NET 10 or later. Everything is managed code; there are
 no native dependencies. (Two operations are Windows-only at run time -- see
 INSTALLATION.)
 
-Provenance: CodeBrix.AssemblyTools is a port of Mono.Cecil 0.11.6 with all
+Provenance: CodeBrix.AssemblyTools is a port of Mono.Cecil with all
 four upstream libraries (core, Rocks, Pdb, Mdb) merged into ONE assembly and
 re-namespaced. The public API is otherwise the upstream API one-to-one, so
 knowledge of the upstream library transfers directly -- but the namespaces
