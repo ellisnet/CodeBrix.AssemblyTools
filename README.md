@@ -20,7 +20,7 @@ Note that the NuGet package ID and the namespace are different - there is no pac
 
 XML documentation (IntelliSense) ships alongside the assembly.
 
-The package has no NuGet dependencies of its own; it builds only against the .NET base class libraries. The IL, symbol-reading and extension-method APIs live in companion namespaces - `CodeBrix.AssemblyTools.Cil`, `.Pdb`, `.Pdb.Cci`, `.Mdb` and `.Rocks` - all in this one assembly.
+The package has no NuGet dependencies of its own; it builds only against the .NET base class libraries. The IL, symbol-reading and extension-method APIs live in companion namespaces - `CodeBrix.AssemblyTools.Cil`, `.Pdb`, `.Mdb` and `.Rocks` - all in this one assembly.
 
 ## CodeBrix.AssemblyTools supports:
 
@@ -28,7 +28,7 @@ The package has no NuGet dependencies of its own; it builds only against the .NE
 * Inspecting and modifying types, methods, fields, properties, events, and custom attributes
 * Reading and emitting IL via `MethodBody` / `ILProcessor`
 * Reading and writing portable PDB debug symbols (`CodeBrix.AssemblyTools.Cil`, `CodeBrix.AssemblyTools.Pdb`)
-* Reading and writing native Windows PDB symbols (`CodeBrix.AssemblyTools.Pdb.Cci`)
+* Reading and writing native Windows PDB symbols (`CodeBrix.AssemblyTools.Pdb`)
 * Reading and writing Mono MDB debug symbols (`CodeBrix.AssemblyTools.Mdb`)
 * Extension-method "rocks" for common tasks: `GetAllTypes`, `SimplifyMacros`, `OptimizeMacros`, `GetConstructors`, `MakeGenericInstanceType`, and more (`CodeBrix.AssemblyTools.Rocks`)
 

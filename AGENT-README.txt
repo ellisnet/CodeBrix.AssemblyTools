@@ -117,8 +117,8 @@ KEY NAMESPACES / USINGS
 `IList<T>`, so LINQ (`.First`, `.Where`, `.ToList`) works on every
 collection property in the model.
 
-The namespaces CodeBrix.AssemblyTools.PE, .Security.Cryptography, .Internal
-and .Pdb.Cci exist in the assembly but contain NO public types; do not add
+The namespaces CodeBrix.AssemblyTools.PE, .Security.Cryptography and
+.Pdb.Cci exist in the assembly but contain NO public types; do not add
 usings for them.
 
 
@@ -1196,14 +1196,16 @@ an Instruction[]). Mismatches are ArgumentException at Create time.
     }
     public enum ExceptionHandlerType { Catch = 0, Filter = 1, Finally = 2, Fault = 4 }
 
-Rocks for IL (namespace CodeBrix.AssemblyTools.Rocks, extension methods):
+Rocks for IL (namespace CodeBrix.AssemblyTools.Rocks; MethodBodyRocks extension
+methods, plus the static ILParser class):
 
     public static void SimplifyMacros (this MethodBody self)   // Br_S -> Br, Ldloc_0 ->
                                                                //   Ldloc, Ldc_I4_S -> Ldc_I4
     public static void OptimizeMacros (this MethodBody self)   // the reverse
     public static void Optimize (this MethodBody self)         // OptimizeMacros + shrink
                                                                //   int-range Ldc_I8
-    public static void Parse (MethodDefinition method, IILVisitor visitor)  // ILParser;
+    // static class ILParser:
+    public static void Parse (MethodDefinition method, IILVisitor visitor)
                                     // IILVisitor has 16 OnInlineXxx callbacks, one
                                     // per operand kind
 
@@ -1507,11 +1509,11 @@ COMPLETE EXAMPLES
         }
     }
 
-   Notes: existing exception handlers and sequence points that referenced
-   `first` now start at the injected `Ldstr` because InsertBefore keeps the
-   target instruction in place and links the new one before it. Branches
-   TO `first` still land on `first` (branch operands are Instruction
-   references, not offsets).
+   Notes: InsertBefore keeps the target instruction in place and links the
+   new one before it, so branches TO `first` still land on `first` (branch
+   operands are Instruction references, not offsets), and exception
+   handlers that referenced `first` still start at `first`, not at the
+   injected `Ldstr`.
 
 2. Walk everything in a module, including nested types and IL, without
    holding the file open:
@@ -1592,10 +1594,10 @@ COMPLETE EXAMPLES
     il.Append (endFinally);
     il.Append (ret);
     foreach (var r in rets)
-        il.Replace (r, il.Create (OpCodes.Leave, ret));   // Replace keeps branch
-                                                          //   targets pointing at
-                                                          //   the new instruction
-    var cleanup = module.ImportReference (typeof (Console).GetMethod ("Out").GetGetMethod ());
+        il.Replace (r, il.Create (OpCodes.Leave, ret));   // Replace does NOT retarget
+                                                          //   branches or handlers that
+                                                          //   pointed at r; fix them up
+    var cleanup = module.ImportReference (typeof (Console).GetProperty ("Out").GetGetMethod ());
     var flush = module.ImportReference (typeof (TextWriter).GetMethod ("Flush"));
     il.InsertBefore (endFinally, il.Create (OpCodes.Call, cleanup));
     il.InsertBefore (endFinally, il.Create (OpCodes.Callvirt, flush));

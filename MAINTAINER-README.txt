@@ -59,7 +59,7 @@ Root files
 Source layout (src/CodeBrix.AssemblyTools/) -- folder to namespace to
 upstream-folder mapping:
 
-    Internal/             -- ns CodeBrix.AssemblyTools.Internal
+    Internal/             -- ns CodeBrix.AssemblyTools (internal types)
                              (upstream: Mono/) Disposable, Empty, MergeSort
                              and other implementation helpers.
     Cecil/                -- ns CodeBrix.AssemblyTools

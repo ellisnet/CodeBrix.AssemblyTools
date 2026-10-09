@@ -57,7 +57,7 @@ commit between the two tags:
   * 5de7d8c  Upstream version bump (not applied)
 
 Modifications made during the port:
-  * Namespace rename: "Mono"           -> "CodeBrix.AssemblyTools.Internal"
+  * Namespace rename: "Mono"           -> "CodeBrix.AssemblyTools"
                       "Mono.Cecil"     -> "CodeBrix.AssemblyTools"
                       "Mono.Cecil.Cil" -> "CodeBrix.AssemblyTools.Cil"
                       "Mono.Cecil.Metadata" -> "CodeBrix.AssemblyTools.Metadata"
